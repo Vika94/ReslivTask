@@ -1,9 +1,12 @@
-package pageObject;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.PropertyReader;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class HomePage extends BasePage {
     private By origin = By.id("origin");
@@ -15,20 +18,20 @@ public class HomePage extends BasePage {
     private By showBtn = By.xpath("//div[@class='prediction-advice__title']");
 
     public HomePage openPage() {
-        open("https://www.aviasales.by/");
+        open(PropertyReader.getConfigProperties().getProperty("url"));
         return this;
     }
 
-    public HomePage enterCityFrom(String city) {
+    public HomePage enterCityFrom(TestData testData) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(origin));
         clearField(origin);
-        getElement(origin).sendKeys(city);
+        getElement(origin).sendKeys(testData.getCityFrom());
         return this;
     }
 
-    public HomePage enterDestinationCity(String city) {
+    public HomePage enterDestinationCity(TestData testData) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(destination));
-        getElement(destination).sendKeys(city);
+        getElement(destination).sendKeys(testData.getCityDestination());
         return this;
     }
 
@@ -56,5 +59,12 @@ public class HomePage extends BasePage {
         driver.switchTo().window(tab2.get(1));
         wait.until(ExpectedConditions.visibilityOfElementLocated(showBtn));
         return this;
+    }
+
+    public String addDays(String plusDay) {
+        Calendar calendar = new GregorianCalendar();
+        int today = calendar.get(Calendar.DATE);
+        int newDay = today + Integer.parseInt(plusDay);
+        return Integer.toString(newDay);
     }
 }

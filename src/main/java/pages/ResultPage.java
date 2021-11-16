@@ -1,5 +1,6 @@
-package pageObject;
+package pages;
 
+import enums.Attribute;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -18,8 +19,8 @@ public class ResultPage extends BasePage {
     private By price = By.xpath("//div[@data-test-id='ticket-desktop']//span[@class='buy-button__text']/..//span[@data-test-id='price']");
 
     public ResultPage verifyCityFrom() {
-        String expectedCity = getElement(origin).getAttribute("value");
-        String expectedReturnCity = getElement(destination).getAttribute("value");
+        String expectedCity = getElement(origin).getAttribute(Attribute.VALUE.value);
+        String expectedReturnCity = getElement(destination).getAttribute(Attribute.VALUE.value);
         List<String> departureCities = new ArrayList<>();
         getElements(flightCities).forEach(data -> departureCities.add(data.getText()));
         for (int i = 0; i < departureCities.size(); i = i + 4) {
@@ -32,8 +33,8 @@ public class ResultPage extends BasePage {
     }
 
     public ResultPage verifyCityDestination() {
-        String expectedCity = getElement(destination).getAttribute("value");
-        String expectedReturnCity = getElement(origin).getAttribute("value");
+        String expectedCity = getElement(destination).getAttribute(Attribute.VALUE.value);
+        String expectedReturnCity = getElement(origin).getAttribute(Attribute.VALUE.value);
         List<String> destinationCities = new ArrayList<>();
         getElements(flightCities).forEach(data -> destinationCities.add(data.getText()));
         for (int i = 1; i < destinationCities.size(); i = i + 4) {
@@ -46,8 +47,8 @@ public class ResultPage extends BasePage {
     }
 
     public ResultPage verifyDepartureData() {
-        String expectedData = getElement(departureData).getAttribute("value");
-        String expectedDataBack = getElement(departureReturnData).getAttribute("value");
+        String expectedData = getElement(departureData).getAttribute(Attribute.VALUE.value);
+        String expectedDataBack = getElement(departureReturnData).getAttribute(Attribute.VALUE.value);
         List<String> departureData = getElements(flightDates).stream().map(WebElement::getText).collect(Collectors.toList());
         for (int i = 0; i < departureData.size(); i = i + 4) {
             Assert.assertEquals(expectedData.substring(0, 3), departureData.get(i).substring(0, 3));
@@ -60,7 +61,7 @@ public class ResultPage extends BasePage {
 
     public ResultPage verifySortPrice() {
         List<String> expectedPrice = getElements(price).stream().map(WebElement::getText).sorted().collect(Collectors.toList());
-        List<String> actualPrice =getElements(price).stream().map(WebElement::getText).collect(Collectors.toList());
+        List<String> actualPrice = getElements(price).stream().map(WebElement::getText).collect(Collectors.toList());
         Assert.assertEquals(expectedPrice, actualPrice);
         return this;
     }

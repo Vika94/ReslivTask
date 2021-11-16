@@ -3,20 +3,20 @@ package tests;
 import driver.BaseTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pageObject.HomePage;
-import pageObject.ResultPage;
+import pages.HomePage;
+import pages.ResultPage;
+import pages.TestData;
 
 public class ResultPageTest extends BaseTest {
-    HomePage homePage;
-    ResultPage resultPage;
+    TestData testData = new TestData();
 
     @BeforeClass
     public void precondition() {
-        homePage = new HomePage();
-        resultPage = new ResultPage();
-        homePage.openPage()
-                .enterCityFrom("Москва")
-                .enterDestinationCity("Санкт-Петербург")
+        testData.setCityFrom("Москва");
+        testData.setCityDestination("Санкт-Петербург");
+        new HomePage().openPage()
+                .enterCityFrom(testData)
+                .enterDestinationCity(testData)
                 .selectPassengers()
                 .clickCalendar()
                 .selectDays("1")
@@ -26,7 +26,7 @@ public class ResultPageTest extends BaseTest {
 
     @Test
     public void checkingResultPage() {
-        resultPage.verifyCityFrom()
+        new ResultPage().verifyCityFrom()
                 .verifyCityDestination()
                 .verifySortPrice()
                 .verifyDepartureData();
