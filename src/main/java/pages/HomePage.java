@@ -22,16 +22,16 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public HomePage enterCityFrom(TestData testData) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(origin));
+    public HomePage enterCityFrom() {
+        wait.until(ExpectedConditions.elementToBeClickable(origin));
         clearField(origin);
-        getElement(origin).sendKeys(testData.getCityFrom());
+        getElement(origin).sendKeys(TestData.CITY_FROM);
         return this;
     }
 
-    public HomePage enterDestinationCity(TestData testData) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(destination));
-        getElement(destination).sendKeys(testData.getCityDestination());
+    public HomePage enterDestinationCity() {
+        wait.until(ExpectedConditions.elementToBeClickable(destination));
+        getElement(destination).sendKeys(TestData.CITY_DESTINATION);
         return this;
     }
 
@@ -42,6 +42,7 @@ public class HomePage extends BasePage {
     }
 
     public HomePage clickCalendar() {
+        wait.until(ExpectedConditions.elementToBeClickable(calendar));
         click(calendar);
         return this;
     }
