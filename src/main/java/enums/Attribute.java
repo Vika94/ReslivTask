@@ -3,14 +3,13 @@ package enums;
 public enum Attribute {
     VALUE("value");
 
-    public String value;
+    private String value;
 
     Attribute(String value) {
         this.value = value;
     }
 
-    public String getElement() {
+    public String getValue() {
         return value;
     }
-
 }

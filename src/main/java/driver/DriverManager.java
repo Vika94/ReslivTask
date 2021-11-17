@@ -4,10 +4,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class DriverCreation {
+public class DriverManager {
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    private DriverCreation() {
+    private DriverManager() {
     }
 
     public static void setDriver() {

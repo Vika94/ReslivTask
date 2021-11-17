@@ -6,8 +6,8 @@ import java.util.Properties;
 public class PropertyReader {
     private static Properties properties;
 
-    public static Properties getConfigProperties() {
-        return getProperties("config");
+    public static String getUrl() {
+        return getProperties("config").getProperty("url");
     }
 
     private static Properties getProperties(String name) {

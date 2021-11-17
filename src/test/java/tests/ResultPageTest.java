@@ -5,18 +5,19 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.ResultPage;
+import testData.TestData;
 
 public class ResultPageTest extends BaseTest {
 
     @BeforeClass
     public void precondition() {
         new HomePage().openPage()
-                .enterCityFrom()
-                .enterDestinationCity()
+                .enterCityFrom(TestData.CITY_FROM)
+                .enterDestinationCity(TestData.CITY_DESTINATION)
                 .selectPassengers()
                 .clickCalendar()
-                .selectDays("1")
-                .selectDays("2")
+                .selectDays(TestData.TOMORROW)
+                .selectDays(TestData.DAY_AFTER_TOMORROW)
                 .clickSearchBtn();
     }
 

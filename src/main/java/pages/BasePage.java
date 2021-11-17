@@ -1,6 +1,7 @@
 package pages;
 
-import driver.DriverCreation;
+import driver.DriverManager;
+import enums.Attribute;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +15,7 @@ public class BasePage {
     protected WebDriverWait wait;
 
     protected BasePage() {
-        this.driver = DriverCreation.getDriver();
+        this.driver = DriverManager.getDriver();
         wait = new WebDriverWait(driver, 30);
     }
 
@@ -36,5 +37,9 @@ public class BasePage {
 
     protected void clearField(By element) {
         getElement(element).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+    }
+
+    protected String getAttribute(By element, Attribute attribute) {
+        return getElement(element).getAttribute(attribute.getValue());
     }
 }
